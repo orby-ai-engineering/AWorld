@@ -48,11 +48,12 @@ class Runners:
             task: User task define.
             run_conf:
         """
+
         if isinstance(task, Task):
             task = [task]
 
         logging.debug(f"[Runners]run_task start task_id={task[0].id} start")
-        result = await exec_tasks(task, run_conf)
+        result = await exec_tasks(task)
         logging.debug(f"[Runners]run_task end task_id={task[0].id} end")
         return result
 

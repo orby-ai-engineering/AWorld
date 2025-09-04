@@ -180,6 +180,7 @@ if __name__ == "__main__":
                 task = Task(input=question, agent=super_agent, conf=TaskConfig())
                 result = Runners.sync_run_task(task=task)
 
+                answer = ""
                 match = re.search(r"<answer>(.*?)</answer>", result[task.id].answer)
                 if match:
                     answer = match.group(1)
@@ -190,6 +191,12 @@ if __name__ == "__main__":
                         logging.info(f"Question {i} Correct!")
                     else:
                         logging.info("Incorrect!")
+                else:
+                    logging.error(
+                        "===>>>>> Could not parse answer from agent response. "
+                        "The response is not in the expected format with <answer> tags."
+                    )
+                    logging.error(f"====>>>>> Full agent response: {result[task.id].answer}")
 
                 # Create the new result record
                 new_result = {
