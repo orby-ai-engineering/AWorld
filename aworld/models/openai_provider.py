@@ -80,7 +80,7 @@ class OpenAIProvider(LLMProviderBase):
 
     @classmethod
     def supported_models(cls) -> list[str]:
-        return ["gpt-4o", "gpt-4", "gpt-3.5-turbo", "o3-mini", "gpt-4o-mini", "deepseek-chat", "deepseek-reasoner",
+        return ["gpt-4o", "gpt-4", "gpt-5", "gpt-3.5-turbo", "o3-mini", "gpt-4o-mini", "deepseek-chat", "deepseek-reasoner",
                 r"qwq-.*", r"qwen-.*"]
 
     def preprocess_messages(self, messages: List[Dict[str, str]]) -> List[Dict[str, str]]:
@@ -426,13 +426,20 @@ class OpenAIProvider(LLMProviderBase):
                           max_tokens: int = None,
                           stop: List[str] = None,
                           **kwargs) -> Dict[str, Any]:
+        model_name = kwargs.get("model_name", self.model_name or "")
         openai_params = {
-            "model": kwargs.get("model_name", self.model_name or ""),
+            "model": model_name,
             "messages": messages,
-            "temperature": temperature,
-            "max_tokens": max_tokens,
-            "stop": stop
         }
+        if model_name == "gpt-5" and temperature == 0.0:
+            pass
+        else:
+            openai_params["temperature"] = temperature
+
+        if max_tokens is not None:
+            openai_params["max_tokens"] = max_tokens
+        if stop is not None:
+            openai_params["stop"] = stop
 
         supported_params = [
             "max_completion_tokens", "meta_data", "modalities", "n", "parallel_tool_calls",
