@@ -53,7 +53,7 @@ class GuardCollection(ActionCollection):
             return f"Original Task: {original_task}\n\nQuestion: {question}"
         return f"Question: {question}"
 
-    def _call_guarding_model(self, prompt: str, temperature: float = 0.1) -> str:
+    def _call_guarding_model(self, prompt: str, temperature: float = 1) -> str:
         """Call the guarding model with the prepared prompt.
 
         Args:
