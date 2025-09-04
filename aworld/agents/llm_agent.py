@@ -10,6 +10,9 @@ from datetime import datetime
 from typing import Dict, Any, List, Callable, Optional
 
 import aworld.trace as trace
+
+LOG_CHUNK_SIZE = 5000
+
 from aworld.core.agent.agent_desc import get_agent_desc
 from aworld.core.agent.base import BaseAgent, AgentResult, is_agent_by_name, is_agent
 from aworld.core.common import ActionResult, Observation, ActionModel, Config
@@ -352,7 +355,7 @@ class Agent(BaseAgent[Observation, List[ActionModel]]):
                 except Exception as e:
                     logger.error(f"[agent] Error parsing msg['content']: {msg}. Error: {e}")
                     content = str(msg['content'])
-                    chunk_size = 500
+                    chunk_size = LOG_CHUNK_SIZE
                     for j in range(0, len(content), chunk_size):
                         chunk = content[j:j + chunk_size]
                         if j == 0:
@@ -361,7 +364,7 @@ class Agent(BaseAgent[Observation, List[ActionModel]]):
                             logger.info(f"[agent] Content (continued): {chunk}")
             else:
                 content = str(msg['content'])
-                chunk_size = 500
+                chunk_size = LOG_CHUNK_SIZE
                 for j in range(0, len(content), chunk_size):
                     chunk = content[j:j + chunk_size]
                     if j == 0:
