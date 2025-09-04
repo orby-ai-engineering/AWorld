@@ -37,7 +37,7 @@ class GuardCollection(ActionCollection):
         )
 
         self._color_log("Intelligence Guard Service initialized", Color.green, "debug")
-        self._color_log(f"Using model: {self._llm_config.llm_model_name}", Color.blue, "debug")
+        self._color_log(f"Using model: {self._llm_config.llm_config.llm_model_name}", Color.blue, "debug")
 
     def _prepare_guarding_prompt(self, question: str, original_task: str = "") -> str:
         """Prepare the guarding prompt with question and optional context.
