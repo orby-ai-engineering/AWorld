@@ -221,6 +221,9 @@ class Agent(BaseAgent[Observation, List[ActionModel]]):
 
     async def async_desc_transform(self, context: Context) -> None:
         """Transform of descriptions of supported tools, agents, and MCP servers in the framework to support function calls of LLM."""
+        # Guard clause to prevent re-initialization
+        if self.tools:
+            return
 
         # Stateless tool
         self.tools = tool_desc_transform(get_tool_desc(),
