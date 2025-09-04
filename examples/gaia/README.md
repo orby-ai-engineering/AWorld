@@ -48,7 +48,7 @@ pip install "marker-pdf[full]" --no-deps
 sh -c "cd aworld/cmd/web/webui && npm install && npm run build"
 
 # Install AWorld
-python setup.py install
+pip install -e .
 ```
 
 ### 4. Install MCP Tool Dependencies
