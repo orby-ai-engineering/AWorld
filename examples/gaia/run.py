@@ -108,7 +108,6 @@ async def run_question(dataset_i, semaphore, super_agent, gaia_dataset_path, spl
             if match:
                 answer = match.group(1)
                 logging.info(f"Agent answer: {answer}")
-                logging.info(f"Correct answer: {dataset_i['Final answer']}")
 
                 if question_scorer(answer, dataset_i["Final answer"]):
                     logging.info(f"Question {dataset_i['task_id']} Correct!")
@@ -120,6 +119,7 @@ async def run_question(dataset_i, semaphore, super_agent, gaia_dataset_path, spl
                     "The response is not in the expected format with <answer> tags."
                 )
                 logging.error(f"Full agent response: {result[task.id].answer}")
+            logging.info(f"Ground truth answer: {dataset_i['Final answer']}")
 
             return {
                 "task_id": dataset_i["task_id"],
@@ -213,8 +213,9 @@ async def main():
 
     semaphore = asyncio.Semaphore(args.num_workers)
     tasks = [run_question(q, semaphore, super_agent, gaia_dataset_path, args.split) for q in questions_to_run]
-    
-    new_results = await tqdm_asyncio.gather(*tasks)
+    print(f"Total questions to run: {len(questions_to_run)}")
+
+    new_results = await tqdm_asyncio.gather(*tasks, desc="Processing Questions", total=len(questions_to_run))
 
     for new_result in new_results:
         if new_result:

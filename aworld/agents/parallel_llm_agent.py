@@ -32,7 +32,7 @@ class ParallelizableAgent(Agent):
         # The function of aggregating the results of the parallel execution of agents.
         self.aggregate_func = aggregate_func
 
-    async def async_policy(self, observation: Observation, info: Dict[str, Any] = {}, **kwargs) -> List[ActionModel]:
+    async def policy(self, observation: Observation, info: Dict[str, Any] = {}, **kwargs) -> List[ActionModel]:
         tasks = []
         if self.agents:
             for agent in self.agents:

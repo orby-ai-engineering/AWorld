@@ -35,7 +35,7 @@ class TaskAgent(Agent):
         else:
             self.swarm.reset(options.get("task"), options.get("context"), options.get("tools"))
 
-    async def async_policy(self, observation: Observation, info: Dict[str, Any] = {}, **kwargs) -> List[ActionModel]:
+    async def policy(self, observation: Observation, info: Dict[str, Any] = {}, **kwargs) -> List[ActionModel]:
         self._finished = False
         task = Task(input=observation.content, swarm=self.swarm)
         results = await exec_tasks([task])

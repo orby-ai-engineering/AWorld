@@ -149,7 +149,7 @@ class WorkflowRunner(TaskRunner):
                         headers={"context": self.context}
                     )
 
-                    if not override_in_subclass('async_policy', cur_agent.__class__, Agent):
+                    if not override_in_subclass('policy', cur_agent.__class__, Agent):
                         message = cur_agent.run(agent_message,
                                                 step=step,
                                                 outputs=self.outputs,
@@ -555,7 +555,7 @@ class HandoffRunner(TaskRunner):
             session_id=self.context.session_id,
             headers={"context": self.context}
         )
-        if override_in_subclass('async_policy', self.swarm.cur_agent.__class__, Agent):
+        if override_in_subclass('policy', self.swarm.cur_agent.__class__, Agent):
             message = self.swarm.cur_agent.run(agent_message,
                                                step=step,
                                                outputs=self.outputs,
@@ -659,7 +659,7 @@ class HandoffRunner(TaskRunner):
                         session_id=self.context.session_id,
                         headers={"context": self.context}
                     )
-                    if not override_in_subclass('async_policy', cur_agent.__class__, Agent):
+                    if not override_in_subclass('policy', cur_agent.__class__, Agent):
                         message = cur_agent.run(agent_message,
                                                 step=step,
                                                 outputs=self.outputs,
@@ -738,7 +738,7 @@ class HandoffRunner(TaskRunner):
             headers={"context": self.context}
         )
 
-        if not override_in_subclass('async_policy', cur_agent.__class__, Agent):
+        if not override_in_subclass('policy', cur_agent.__class__, Agent):
             message = cur_agent.run(agent_message,
                                     step=step,
                                     outputs=self.outputs,

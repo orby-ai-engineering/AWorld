@@ -248,23 +248,12 @@ class BaseAgent(Generic[INPUT, OUTPUT]):
                 )
             )
         await self.async_pre_run()
-        result = await self.async_policy(observation, message=message, **kwargs)
+        result = await self.policy(observation, message=message, **kwargs)
         final_result = await self.async_post_run(result, observation, message)
         return final_result
 
     @abc.abstractmethod
-    def policy(
-        self, observation: INPUT, info: Dict[str, Any] = None, **kwargs
-    ) -> OUTPUT:
-        """The strategy of an agent can be to decide which tools to use in the environment, or to delegate tasks to other agents.
-
-        Args:
-            observation: The state observed from tools in the environment.
-            info: Extended information is used to assist the agent to decide a policy.
-        """
-
-    @abc.abstractmethod
-    async def async_policy(
+    async def policy(
         self, observation: INPUT, info: Dict[str, Any] = None, **kwargs
     ) -> OUTPUT:
         """The strategy of an agent can be to decide which tools to use in the environment, or to delegate tasks to other agents.

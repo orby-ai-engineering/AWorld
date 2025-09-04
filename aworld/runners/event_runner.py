@@ -56,7 +56,7 @@ class TaskEventRunner(TaskRunner):
             logger.debug(f"swarm: {self.swarm}")
             # register agent handler
             for _, agent in self.swarm.agents.items():
-                if override_in_subclass('async_policy', agent.__class__, Agent):
+                if override_in_subclass('policy', agent.__class__, Agent):
                     await self.event_mng.register(Constants.AGENT, agent.id(), agent.async_run)
                 else:
                     await self.event_mng.register(Constants.AGENT, agent.id(), agent.run)

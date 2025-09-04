@@ -457,20 +457,7 @@ class Agent(BaseAgent[Observation, List[ActionModel]]):
             message
         )
 
-    def policy(self, observation: Observation, info: Dict[str, Any] = {}, message: Message = None, **kwargs) -> List[
-        ActionModel]:
-        """The strategy of an agent can be to decide which tools to use in the environment, or to delegate tasks to other agents.
-
-        Args:
-            observation: The state observed from tools in the environment.
-            info: Extended information is used to assist the agent to decide a policy.
-
-        Returns:
-            ActionModel sequence from agent policy
-        """
-        return sync_exec(self.async_policy, observation, info, message, **kwargs)
-
-    async def async_policy(self, observation: Observation, info: Dict[str, Any] = {}, message: Message = None,
+    async def policy(self, observation: Observation, info: Dict[str, Any] = {}, message: Message = None,
                            **kwargs) -> List[ActionModel]:
         """The strategy of an agent can be to decide which tools to use in the environment, or to delegate tasks to other agents.
 
@@ -481,7 +468,7 @@ class Agent(BaseAgent[Observation, List[ActionModel]]):
         Returns:
             ActionModel sequence from agent policy
         """
-        logger.info(f"Agent{type(self)}#{self.id()}: async_policy start")
+        logger.info(f"Agent{type(self)}#{self.id()}: policy start")
 
         # Get current step information for trace recording
         source_span = trace.get_current_span()

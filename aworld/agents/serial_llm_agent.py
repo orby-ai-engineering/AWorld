@@ -33,7 +33,7 @@ class SerialableAgent(Agent):
         self.agents = agents if agents else []
         self.aggregate_func = aggregate_func
 
-    async def async_policy(self, observation: Observation, info: Dict[str, Any] = {}, **kwargs) -> List[ActionModel]:
+    async def policy(self, observation: Observation, info: Dict[str, Any] = {}, **kwargs) -> List[ActionModel]:
         observations = []
         action = ActionModel(agent_name=self.id(), policy_info=observation.content)
         if self.agents:
