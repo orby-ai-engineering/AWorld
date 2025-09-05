@@ -128,7 +128,12 @@ class ModelConfig(BaseConfig):
         # init max_model_len
         if self.max_model_len is None:
             # qwen or other default model_type
-            self.max_model_len = 128000 if self.model_type != 'claude' else 200000
+            if self.model_type != 'claude':
+                self.max_model_len = 128000
+            elif self.llm_model_name.startswith("gpt-5"):
+                self.max_model_len = 400000
+            else:
+                self.max_model_len = 200000
 
 
 class LlmCompressionConfig(BaseConfig):

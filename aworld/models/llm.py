@@ -19,7 +19,7 @@ from aworld.models.model_response import ModelResponse
 # Predefined model names for common providers
 MODEL_NAMES = {
     "anthropic": ["claude-3-5-sonnet-20241022", "claude-3-5-sonnet-20240620", "claude-3-opus-20240229"],
-    "openai": ["gpt-4o", "gpt-4", "gpt-5", "gpt-3.5-turbo", "o3-mini", "gpt-4o-mini", "deepseek-chat", "deepseek-reasoner",
+    "openai": ["gpt-4o", "gpt-4", r"gpt-5.*", "gpt-3.5-turbo", "o3-mini", "gpt-4o-mini", "deepseek-chat", "deepseek-reasoner",
                 r"qwq-.*", r"qwen-.*"],
     "azure_openai": ["gpt-4", "gpt-4-turbo", "gpt-4o", "gpt-35-turbo"],
 }

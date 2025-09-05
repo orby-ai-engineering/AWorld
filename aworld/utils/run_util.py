@@ -148,7 +148,7 @@ async def exec_process_agents(question: Any,
     return res
 
 
-async def exec_tasks(tasks: List[Task], run_conf: RunConfig = RunConfig()) -> Dict[str, TaskResponse]:
+async def exec_tasks(tasks: List[Task], run_conf: RunConfig = RunConfig(worker_num=5)) -> Dict[str, TaskResponse]:
     final_tasks = []
     # task list sequence-dependent execution
     if run_conf.sequence_dependent:
