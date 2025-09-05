@@ -431,7 +431,7 @@ class OpenAIProvider(LLMProviderBase):
             "model": model_name,
             "messages": messages,
         }
-        if model_name.startswith("gpt-5") and temperature == 0.0:
+        if model_name.startswith("gpt-5"):
             pass
         else:
             openai_params["temperature"] = temperature
