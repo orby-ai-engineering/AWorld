@@ -80,7 +80,7 @@ class OpenAIProvider(LLMProviderBase):
 
     @classmethod
     def supported_models(cls) -> list[str]:
-        return ["gpt-4o", "gpt-4", "gpt-5", "gpt-3.5-turbo", "o3-mini", "gpt-4o-mini", "deepseek-chat", "deepseek-reasoner",
+        return ["gpt-4o", "gpt-4", r"gpt-5.*", "gpt-3.5-turbo", "o3-mini", "gpt-4o-mini", "deepseek-chat", "deepseek-reasoner",
                 r"qwq-.*", r"qwen-.*"]
 
     def preprocess_messages(self, messages: List[Dict[str, str]]) -> List[Dict[str, str]]:
@@ -431,7 +431,7 @@ class OpenAIProvider(LLMProviderBase):
             "model": model_name,
             "messages": messages,
         }
-        if model_name == "gpt-5" and temperature == 0.0:
+        if model_name.startswith("gpt-5") and temperature == 0.0:
             pass
         else:
             openai_params["temperature"] = temperature

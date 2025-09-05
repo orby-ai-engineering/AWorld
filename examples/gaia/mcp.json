@@ -10,18 +10,11 @@
             },
             "client_session_timeout_seconds": 9999.0
         },
-        "browser": {
-            "command": "python",
+        "playwright": {
+            "command": "npx",
             "args": [
-                "-m",
-                "examples.gaia.mcp_collections.tools.browser"
-            ],
-            "env": {
-                "LLM_MODEL_NAME": "${LLM_MODEL_NAME}",
-                "LLM_API_KEY": "${LLM_API_KEY}",
-                "LLM_BASE_URL": "${LLM_BASE_URL}"
-            },
-            "client_session_timeout_seconds": 9999.0
+                "@playwright/mcp@latest"
+            ]
         },
         "chess": {
             "command": "python",
@@ -200,6 +193,15 @@
             ],
             "env": {
             },
+            "client_session_timeout_seconds": 9999.0
+        },
+        "maneuvering": {
+            "command": "python",
+            "args": [
+                "-m",
+                "examples.gaia.mcp_collections.intelligence.guard"
+            ],
+            "env": {},
             "client_session_timeout_seconds": 9999.0
         }
     }

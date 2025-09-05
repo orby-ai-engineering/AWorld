@@ -213,7 +213,7 @@ async def main():
 
     semaphore = asyncio.Semaphore(args.num_workers)
     tasks = [run_question(q, semaphore, super_agent, gaia_dataset_path, args.split) for q in questions_to_run]
-    print(f"Total questions to run: {len(questions_to_run)}")
+    logging.info(f"Total questions to run: {len(questions_to_run)}")
 
     new_results = await tqdm_asyncio.gather(*tasks, desc="Processing Questions", total=len(questions_to_run))
 

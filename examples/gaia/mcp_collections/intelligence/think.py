@@ -158,7 +158,7 @@ class ThinkCollection(ActionCollection):
 
             # Prepare metadata
             metadata = {
-                "model_name": self._llm_config.llm_model_name,
+                "model_name": self._llm_config.llm_config.llm_model_name,
                 "reasoning_style": reasoning_style,
                 "response_length": len(reasoning_result),
             }
@@ -204,8 +204,8 @@ class ThinkCollection(ActionCollection):
         )
 
         metadata = {
-            "model_name": self._llm_config.llm_model_name,
-            "provider": self._llm_config.llm_provider,
+            "model_name": self._llm_config.llm_config.llm_model_name,
+            "provider": self._llm_config.llm_config.llm_provider,
             "supported_capabilities": list(capabilities.keys()),
             "total_capabilities": len(capabilities),
             "reasoning_styles": ["detailed", "concise", "step-by-step"],
