@@ -17,3 +17,6 @@ aiohttp~=3.9.5
 click
 packaging
 numpy
+tqdm
+browser-use==0.6.3
+surya-ocr==0.16.1
